@@ -11,12 +11,16 @@ function SignUp() {
 
   const handleSignUp = (e) => {
     e.preventDefault();
+    console.log('Sign-up form submitted with:', { email, password });
+
     // Get existing users from localStorage
     const users = JSON.parse(localStorage.getItem('users')) || [];
+    console.log('Current users in localStorage:', users);
+
     // Check if email already exists (case-insensitive)
     const existingUser = users.find((u) => u.email.toLowerCase() === email.toLowerCase());
-
     if (existingUser) {
+      console.log('Email already exists:', email);
       setError('Email already exists. Please use a different email.');
       return;
     }
@@ -24,11 +28,23 @@ function SignUp() {
     // Add new user to the list (store email in lowercase)
     const newUser = { email: email.toLowerCase(), password };
     users.push(newUser);
-    localStorage.setItem('users', JSON.stringify(users));
+    console.log('Adding new user:', newUser);
+    try {
+      localStorage.setItem('users', JSON.stringify(users));
+      console.log('Users saved to localStorage:', JSON.parse(localStorage.getItem('users')));
+    } catch (err) {
+      console.error('Error saving to localStorage:', err);
+      setError('Failed to save user data. Please try again.');
+      return;
+    }
+
     // Automatically log in the new user
     localStorage.setItem('loggedInUser', JSON.stringify(newUser));
+    console.log('Logged in user:', newUser);
+
     setError('');
     // Redirect to dashboard
+    console.log('Navigating to /dashboard');
     navigate('/dashboard');
   };
 

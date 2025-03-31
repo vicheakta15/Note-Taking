@@ -1,0 +1,26 @@
+.landing-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  text-align: center;
+}
+
+.landing-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.landing-content button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.landing-content button:hover {
+  background-color: #0056b3;
+}
